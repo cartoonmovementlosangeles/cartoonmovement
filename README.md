@@ -12,9 +12,11 @@ Plain HTML/CSS, no build tools, free forever on GitHub Pages.
 - `comics/<student>/comic-1/` through `comic-6/` — one reader page per comic
 - `links.html` — gif spot + a simple list of links
 
-`comics.html` and each `comics/<student>/index.html` use a sticky bar at
-the top for the back link, so it never covers the art underneath. Reader
-pages keep the small floating circle back button in the corner instead.
+`comics.html` and each `comics/<student>/index.html` use the small floating
+back button in the corner. Reader pages use a different, non-floating back
+link instead — it sits above the first panel and scrolls away with the
+page, so once you're actually reading a comic nothing sits on top of the
+art or takes up screen space.
 
 ## If this is a brand new repo
 

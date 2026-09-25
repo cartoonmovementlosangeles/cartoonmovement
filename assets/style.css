@@ -89,24 +89,22 @@ a { color: inherit; }
   color: #111;
 }
 
-/* Sticky, non-overlapping header used on grid/list pages (comics.html and
-   the student index pages) so the back link never sits on top of art. */
-.list-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
+/* In-flow (not fixed) back link — used only on reader pages, so it
+   scrolls away with the first panel and gets out of the way once
+   you're actually reading. */
+.back-inline {
+  display: inline-flex;
   align-items: center;
-  padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid #eee;
-}
-
-.list-header a {
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 18px;
   text-decoration: none;
   color: #111;
-  font-size: 20px;
-  line-height: 1;
 }
 
 /* ---------- About page ---------- */
