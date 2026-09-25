@@ -1,0 +1,209 @@
+/* Cartoon Movement — shared styles
+   Palette: warm newsprint paper, near-black ink, a single brick-red accent.
+   Structural device: thick "panel" borders everywhere, echoing comic-panel
+   gutters. No rounded corners, no drop shadows — flat, printed feel. */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --paper: #f6f3ec;
+  --ink: #1b1b1b;
+  --ink-soft: #4a4a46;
+  --accent: #c1432e;
+  --line: #1b1b1b;
+  --line-soft: #d8d2c4;
+  --panel-gap: 80px;
+  --max-width: 900px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+h1, h2, h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0;
+}
+
+a {
+  color: var(--ink);
+}
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  border-bottom: 3px solid var(--line);
+  padding: 48px 24px 28px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.masthead__title {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: -0.01em;
+}
+
+.masthead__title a {
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.masthead__tagline {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+/* ---------- Intro copy ---------- */
+
+.intro {
+  max-width: var(--max-width);
+  margin: 32px auto 8px;
+  padding: 0 24px;
+}
+
+.intro p {
+  max-width: 62ch;
+}
+
+/* ---------- Comic grid (homepage) ---------- */
+
+.comic-grid {
+  max-width: var(--max-width);
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2px;
+  background: var(--line);
+  border: 2px solid var(--line);
+}
+
+.comic-card {
+  background: var(--paper);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background 0.15s ease;
+}
+
+.comic-card:hover {
+  background: #ece7da;
+}
+
+.comic-card__cover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--ink);
+  background-size: cover;
+  background-position: center;
+  border: 2px solid var(--ink);
+}
+
+.comic-card__title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.comic-card__meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  border-top: 2px solid var(--line-soft);
+}
+
+/* ---------- Reader page ---------- */
+
+.reader-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 20px;
+}
+
+.reader-header .back-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--accent);
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.reader-header .back-link:hover {
+  text-decoration: underline;
+}
+
+.reader-header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+}
+
+.reader-strip {
+  background: #ffffff;
+  border-top: 3px solid var(--line);
+  border-bottom: 3px solid var(--line);
+  padding: 60px 0;
+}
+
+.panel {
+  display: block;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto var(--panel-gap);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.panel:last-child {
+  margin-bottom: 0;
+}
+
+.panel.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reader-end {
+  max-width: var(--max-width);
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.reader-end a {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
