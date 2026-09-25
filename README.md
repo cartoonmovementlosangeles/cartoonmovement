@@ -1,69 +1,56 @@
 # Cartoon Movement — setup guide
 
-This is a small static website: plain HTML/CSS/JS, no build tools, free to
-host forever on GitHub Pages.
+Plain HTML/CSS, no build tools, free forever on GitHub Pages.
 
-## 1. Make a new GitHub account
+## Pages in this site
 
-Since you want this separate from any personal account:
+- `index.html` — homepage: title block + about / comics / links
+- `about.html` — description + workshop packet download
+- `comics.html` — grid of comics, numbered 1–6
+- `comics/comic-1/` through `comics/comic-6/` — one reader page per comic
+- `links.html` — gif spot + a simple list of links
 
-1. Go to https://github.com/join
-2. Sign up with an email you're happy to use publicly (or a separate one).
-3. Pick a username. **This matters**: your site's default URL will be
-   `https://USERNAME.github.io`, so choose something you'd want in a link —
-   e.g. `cartoonmovement` or similar (check it's free as you type it).
+## If this is a brand new repo
 
-## 2. Create the repository
+1. Create a GitHub account and a repo named exactly `USERNAME.github.io`
+   (see below for why the name matters).
+2. Upload all these files through **Add file → Upload files**, keeping the
+   folder structure (`assets/`, `comics/`, etc).
+3. In **Settings → Pages**, set Source to "Deploy from a branch", branch
+   `main`, folder `/(root)`. Save, wait a minute, visit your site.
 
-1. While logged into the new account, click the **+** in the top right →
-   **New repository**.
-2. Name the repository **exactly** `USERNAME.github.io` (swap in your real
-   username). This exact name is what makes GitHub serve it as a website.
-3. Set it to **Public**. Don't add a README/gitignore (we already have
-   files). Click **Create repository**.
+## If you're updating an existing repo
 
-## 3. Upload these files
+Just upload these files the same way (**Add file → Upload files**) — they'll
+overwrite the old ones with the same names. The site updates within a
+minute or two of committing.
 
-Easiest path with no command line:
+## Adding your own images
 
-1. On the new repo's page, click **Add file → Upload files**.
-2. Drag in everything from this folder (`index.html`, `README.md`, the
-   `assets` folder, and the `comics` folder), keeping the folder structure.
-3. Scroll down, click **Commit changes**.
+Every image block uses a background-color as a placeholder. To swap in
+real art, add `background-image:url('path/to/your/file.jpg')` to that
+block's `style` attribute — each file has a comment showing exactly how.
+Images are never cropped: if a photo's proportions don't match the block,
+the background color shows around the edges instead of cutting anything
+off.
 
-(If you later get comfortable with git, `git clone` + `git push` works the
-same way — but uploading through the browser is completely fine to start.)
+Drop your actual image files into `assets/images/` (create subfolders per
+comic if that's easier to keep organized), then point each block at the
+right filename.
 
-## 4. Turn on GitHub Pages
+## Adding a 7th comic (or more)
 
-1. In the repo, go to **Settings → Pages**.
-2. Under "Build and deployment", Source should be **Deploy from a branch**,
-   Branch: **main**, folder **/(root)**. Save.
-3. Give it a minute or two, then visit `https://USERNAME.github.io`. Your
-   site should be live.
-
-## 5. Adding a new comic
-
-For each new comic (say it's called "Rooftop"):
-
-1. Make a folder `assets/images/rooftop/` and drop your panel images in
-   there (numbered however you like: `panel-01.jpg`, `panel-02.jpg`, ...).
-2. Copy `comics/example-comic/index.html` into a new folder,
-   `comics/rooftop/index.html`.
-3. In that new file, update the `<title>`, the `<h1>`, and the list of
-   `<img class="panel">` tags to point at your new images.
-4. In `index.html` (the homepage), copy one `.comic-card` block, update the
-   title, description, cover image, and the link href to
-   `comics/rooftop/index.html`.
-5. Upload the new/changed files through **Add file → Upload files** again
-   (or commit via git). The live site updates within a minute or two.
+1. Duplicate one of the `comics/comic-N/` folders, rename it (e.g.
+   `comics/comic-7/`).
+2. In the new folder's `index.html`, update the panels to your own images.
+3. In `comics.html`, copy one of the grid tiles, update the number and the
+   link to point at your new folder.
 
 ## Notes
 
-- Keep panel images reasonably sized (under ~1–2MB each) so pages load
-  fast — most image editors have an "export for web" option.
-- The vertical scroll strip has a white background on purpose (like most
-  webtoon readers); the rest of the site uses the warm paper tone.
-- Everything is plain files — no npm, no build step, no server. If
-  something looks broken, it's almost always a filename/path mismatch
-  (case-sensitive!) between the HTML and the actual file.
+- No JavaScript is used anywhere in the live site — it's all plain links
+  and CSS, so nothing to break.
+- Keep image files reasonably small (under ~1–2MB each) so pages load
+  fast.
+- Filenames and paths are case-sensitive — if an image doesn't show up,
+  that's almost always the cause.

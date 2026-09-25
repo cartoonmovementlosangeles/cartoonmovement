@@ -8,39 +8,34 @@
 </head>
 <body>
 
-  <header class="masthead">
-    <h1 class="masthead__title"><a href="index.html">Cartoon Movement</a></h1>
-    <p class="masthead__tagline">Comics made in and around the Cartoon Movement workshop — a space for thinking through comics composition, panel by panel.</p>
-  </header>
+  <!-- Each block below is a 50vh tile. To add your own image, set
+       background-image on the block's style, e.g.:
+       style="background-color:#2b2b2b; background-image:url('assets/images/cover-1.jpg');"
+       The image will never be cropped — it's letterboxed by the
+       background-color if its proportions don't match the tile. -->
+  <div class="block-grid">
 
-  <section class="intro">
-    <p>Read below, scrolling straight down — no ads, no paywall, just comics.</p>
-  </section>
+    <div class="cover" style="background-color:#c8c3b8;"></div>
 
-  <!-- COMIC GRID
-       Add one .comic-card per comic. Copy an existing card, update the
-       three things marked below, and link to that comic's reader page. -->
-  <section class="comic-grid">
+    <div class="cover" style="background-color:#2b2b2b;">
+      <span class="label title" style="color:#f4f2ec;">CARTOON MOVEMENT</span>
+    </div>
 
-    <a class="comic-card" href="comics/example-comic/index.html">
-      <span class="comic-card__cover" style="background-image: url('assets/images/example-comic/cover.jpg');"></span>
-      <span class="comic-card__title">Example Comic</span> <!-- 1. title -->
-      <span class="comic-card__meta">A short description or issue number</span> <!-- 2. meta -->
+    <div class="cover" style="background-color:#8a7f6b;"></div>
+
+    <a class="cover" href="about.html" style="background-color:#6b6b6b;">
+      <span class="label" style="color:#f4f2ec;">about</span>
     </a>
 
-    <!--
-    <a class="comic-card" href="comics/your-comic-slug/index.html">
-      <span class="comic-card__cover" style="background-image: url('assets/images/your-comic-slug/cover.jpg');"></span>
-      <span class="comic-card__title">Your Comic Title</span>
-      <span class="comic-card__meta">Description</span>
+    <a class="cover" href="comics.html" style="background-color:#4a5a4a;">
+      <span class="label" style="color:#eef1ea;">comics</span>
     </a>
-    -->
 
-  </section>
+    <a class="cover" href="links.html" style="background-color:#3a3a3a;">
+      <span class="label" style="color:#f4f2ec;">links</span>
+    </a>
 
-  <footer class="site-footer">
-    <p>Cartoon Movement — a workshop on comics composition.</p>
-  </footer>
+  </div>
 
 </body>
 </html>

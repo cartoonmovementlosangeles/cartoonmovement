@@ -1,209 +1,169 @@
 /* Cartoon Movement — shared styles
-   Palette: warm newsprint paper, near-black ink, a single brick-red accent.
-   Structural device: thick "panel" borders everywhere, echoing comic-panel
-   gutters. No rounded corners, no drop shadows — flat, printed feel. */
-
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap');
-
-:root {
-  --paper: #f6f3ec;
-  --ink: #1b1b1b;
-  --ink-soft: #4a4a46;
-  --accent: #c1432e;
-  --line: #1b1b1b;
-  --line-soft: #d8d2c4;
-  --panel-gap: 80px;
-  --max-width: 900px;
-}
+   Minimal, full-bleed. Images are never cropped: blocks show the
+   whole image (letterboxed by the block's background color) rather
+   than cutting off edges to fill the space. */
 
 * { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
+html, body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 17px;
-  line-height: 1.55;
-}
-
-h1, h2, h3 {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  line-height: 1.1;
-  margin: 0;
-}
-
-a {
-  color: var(--ink);
-}
-
-/* ---------- Masthead ---------- */
-
-.masthead {
-  border-bottom: 3px solid var(--line);
-  padding: 48px 24px 28px;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
-.masthead__title {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  letter-spacing: -0.01em;
-}
-
-.masthead__title a {
-  text-decoration: none;
-  color: var(--ink);
-}
-
-.masthead__tagline {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: var(--ink-soft);
-  max-width: 60ch;
-}
-
-/* ---------- Intro copy ---------- */
-
-.intro {
-  max-width: var(--max-width);
-  margin: 32px auto 8px;
-  padding: 0 24px;
-}
-
-.intro p {
-  max-width: 62ch;
-}
-
-/* ---------- Comic grid (homepage) ---------- */
-
-.comic-grid {
-  max-width: var(--max-width);
-  margin: 40px auto 80px;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2px;
-  background: var(--line);
-  border: 2px solid var(--line);
-}
-
-.comic-card {
-  background: var(--paper);
-  padding: 20px;
-  text-decoration: none;
-  color: var(--ink);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: background 0.15s ease;
-}
-
-.comic-card:hover {
-  background: #ece7da;
-}
-
-.comic-card__cover {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  background: var(--ink);
-  background-size: cover;
-  background-position: center;
-  border: 2px solid var(--ink);
-}
-
-.comic-card__title {
-  font-family: 'Fraunces', serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-}
-
-.comic-card__meta {
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-}
-
-/* ---------- Footer ---------- */
-
-.site-footer {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 24px 24px 60px;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  border-top: 2px solid var(--line-soft);
-}
-
-/* ---------- Reader page ---------- */
-
-.reader-header {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 32px 24px 20px;
-}
-
-.reader-header .back-link {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: var(--accent);
-  text-decoration: none;
-  margin-bottom: 14px;
-}
-
-.reader-header .back-link:hover {
-  text-decoration: underline;
-}
-
-.reader-header h1 {
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-}
-
-.reader-strip {
+  padding: 0;
   background: #ffffff;
-  border-top: 3px solid var(--line);
-  border-bottom: 3px solid var(--line);
-  padding: 60px 0;
+  color: #111111;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: inherit; }
+
+/* ---------- Grid blocks (home page + comics list) ---------- */
+
+.block-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 50vh;
+  gap: 2px;
+  width: 100%;
+}
+
+.cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-decoration: none;
+}
+
+.cover .label {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 12px;
+  font-size: clamp(1rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.cover .label.title {
+  font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Reader: edge-to-edge panels ---------- */
+
+.reader {
+  width: 100%;
 }
 
 .panel {
   display: block;
-  max-width: 720px;
   width: 100%;
-  margin: 0 auto var(--panel-gap);
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  border: none;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.panel:last-child {
-  margin-bottom: 0;
+.back-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  z-index: 40;
+  text-decoration: none;
+  color: #111;
 }
 
-.panel.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* ---------- About page ---------- */
+
+.simple-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 80px 24px 100px;
 }
 
-.reader-end {
-  max-width: var(--max-width);
-  margin: 40px auto 80px;
+.simple-page h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 24px;
+}
+
+.simple-page p {
+  line-height: 1.7;
+  margin: 0 0 18px;
+}
+
+.packet-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: 1px solid #111;
+  color: #111;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.packet-link:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ---------- Links page ---------- */
+
+.gif-slot {
+  max-width: 640px;
+  margin: 80px auto 32px;
   padding: 0 24px;
-  text-align: center;
 }
 
-.reader-end a {
-  color: var(--accent);
+.gif-slot .placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.9rem;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .panel {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
+.gif-slot img {
+  width: 100%;
+  display: block;
+}
+
+.links-list {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.links-list a {
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+.links-list a:hover {
+  color: #555;
 }
