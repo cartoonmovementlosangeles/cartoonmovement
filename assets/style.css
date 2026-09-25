@@ -89,6 +89,26 @@ a { color: inherit; }
   color: #111;
 }
 
+/* Sticky, non-overlapping header used on grid/list pages (comics.html and
+   the student index pages) so the back link never sits on top of art. */
+.list-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #eee;
+}
+
+.list-header a {
+  text-decoration: none;
+  color: #111;
+  font-size: 20px;
+  line-height: 1;
+}
+
 /* ---------- About page ---------- */
 
 .simple-page {

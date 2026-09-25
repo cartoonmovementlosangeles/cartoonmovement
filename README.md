@@ -6,9 +6,15 @@ Plain HTML/CSS, no build tools, free forever on GitHub Pages.
 
 - `index.html` — homepage: title block + about / comics / links
 - `about.html` — description + workshop packet download
-- `comics.html` — grid of comics, numbered 1–6
-- `comics/comic-1/` through `comics/comic-6/` — one reader page per comic
+- `comics.html` — grid of student names (currently placeholder IDW Sonic
+  characters — swap these for your actual students)
+- `comics/<student>/` — that student's grid of 1–6
+- `comics/<student>/comic-1/` through `comic-6/` — one reader page per comic
 - `links.html` — gif spot + a simple list of links
+
+`comics.html` and each `comics/<student>/index.html` use a sticky bar at
+the top for the back link, so it never covers the art underneath. Reader
+pages keep the small floating circle back button in the corner instead.
 
 ## If this is a brand new repo
 
@@ -38,13 +44,24 @@ Drop your actual image files into `assets/images/` (create subfolders per
 comic if that's easier to keep organized), then point each block at the
 right filename.
 
-## Adding a 7th comic (or more)
+## Renaming a placeholder student
 
-1. Duplicate one of the `comics/comic-N/` folders, rename it (e.g.
-   `comics/comic-7/`).
-2. In the new folder's `index.html`, update the panels to your own images.
-3. In `comics.html`, copy one of the grid tiles, update the number and the
-   link to point at your new folder.
+1. In `comics.html`, change that tile's label text and its link (e.g.
+   `comics/belle/index.html` → `comics/your-student-name/index.html`).
+2. Rename the `comics/belle/` folder itself to match (GitHub's web
+   interface doesn't rename folders directly — easiest is to upload a
+   fresh folder with the new name and delete the old one, or do this
+   step with git once you're comfortable with it).
+3. Inside that folder, `index.html`'s back link and each `comic-N`
+   folder can stay as-is — just point their panels at real images
+   whenever you're ready.
+
+## Adding a 7th student (or more)
+
+1. Duplicate one of the `comics/<student>/` folders (with all its
+   `comic-1` through `comic-6` subfolders), rename it.
+2. In `comics.html`, copy one of the grid tiles, update the name and the
+   link to point at the new folder.
 
 ## Notes
 
