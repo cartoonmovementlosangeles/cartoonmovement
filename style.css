@@ -87,6 +87,18 @@ a { color: inherit; }
   z-index: 40;
   text-decoration: none;
   color: #111;
+  animation: back-btn-sway 1.6s ease-in-out infinite;
+}
+
+@keyframes back-btn-sway {
+  0%, 100% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-btn {
+    animation: none;
+  }
 }
 
 /* In-flow (not fixed) back link — used only on reader pages, so it
