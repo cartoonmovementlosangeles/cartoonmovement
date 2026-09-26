@@ -15,11 +15,22 @@ html, body {
 
 a { color: inherit; }
 
-/* Zigzag tooth depth for the jagged edge below — scales with viewport
-   width so the bite stays proportional on narrow phone screens instead
-   of staying a fixed 22px and eating into a much smaller block. */
+/* Zigzag tooth depth for the jagged edge below — kept in vh (not px
+   or vw) on purpose, so each tooth is always a perfect 45-degree
+   diagonal (a square cut corner-to-corner): the horizontal depth per
+   tooth matches the vertical distance per tooth exactly, and both
+   scale off the same viewport-height reference the block's own 50vh
+   height uses. A narrower --jag-depth below is paired with a denser
+   polygon (more, smaller teeth) so the squares stay square instead of
+   just shrinking sideways. */
 :root {
-  --jag-depth: clamp(8px, 2.5vw, 22px);
+  --jag-depth: 2.5vh;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --jag-depth: 1.25vh;
+  }
 }
 
 /* ---------- Grid blocks (home page + comics list) ---------- */
@@ -69,8 +80,8 @@ a { color: inherit; }
    They're split across two elements on purpose — filter and clip-path
    on the *same* element don't play well together (the filter effect
    gets computed and then cropped by the same clip-path, hiding any
-   shadow that falls outside the clipped shape). Adjust the 22px depth
-   or add/remove points below to change tooth size/count. */
+   shadow that falls outside the clipped shape). This is the desktop/
+   tablet version — 10 big square teeth. */
 .jagged-wrap {
   position: relative;
   z-index: 2;
@@ -110,7 +121,61 @@ a { color: inherit; }
   );
 }
 
+/* Mobile: same square-tooth math, just twice as many (smaller) teeth
+   to match the smaller --jag-depth above, so it bites into the next
+   block less on a narrow screen while staying perfectly square. */
+@media (max-width: 600px) {
+  .jagged-wrap .cover {
+    clip-path: polygon(
+      0% 0%,
+    100% 0%,
+    calc(100% - var(--jag-depth)) 2.5%,
+    100% 5%,
+    calc(100% - var(--jag-depth)) 7.5%,
+    100% 10%,
+    calc(100% - var(--jag-depth)) 12.5%,
+    100% 15%,
+    calc(100% - var(--jag-depth)) 17.5%,
+    100% 20%,
+    calc(100% - var(--jag-depth)) 22.5%,
+    100% 25%,
+    calc(100% - var(--jag-depth)) 27.5%,
+    100% 30%,
+    calc(100% - var(--jag-depth)) 32.5%,
+    100% 35%,
+    calc(100% - var(--jag-depth)) 37.5%,
+    100% 40%,
+    calc(100% - var(--jag-depth)) 42.5%,
+    100% 45%,
+    calc(100% - var(--jag-depth)) 47.5%,
+    100% 50%,
+    calc(100% - var(--jag-depth)) 52.5%,
+    100% 55%,
+    calc(100% - var(--jag-depth)) 57.5%,
+    100% 60%,
+    calc(100% - var(--jag-depth)) 62.5%,
+    100% 65%,
+    calc(100% - var(--jag-depth)) 67.5%,
+    100% 70%,
+    calc(100% - var(--jag-depth)) 72.5%,
+    100% 75%,
+    calc(100% - var(--jag-depth)) 77.5%,
+    100% 80%,
+    calc(100% - var(--jag-depth)) 82.5%,
+    100% 85%,
+    calc(100% - var(--jag-depth)) 87.5%,
+    100% 90%,
+    calc(100% - var(--jag-depth)) 92.5%,
+    100% 95%,
+    calc(100% - var(--jag-depth)) 97.5%,
+    100% 100%,
+    0% 100%
+    );
+  }
+}
+
 /* ---------- Reader: edge-to-edge panels ---------- */
+
 
 .reader {
   width: 100%;
