@@ -25,11 +25,17 @@ a { color: inherit; }
    just shrinking sideways. */
 :root {
   --jag-depth: 2.5vh;
+  --jag-shadow: 6px 0 3px rgba(0, 0, 0, 0.45);
+  --row-shadow-height: 24px;
+  --row-shadow-opacity: 0.18;
 }
 
 @media (max-width: 600px) {
   :root {
     --jag-depth: 1.25vh;
+    --jag-shadow: 3px 0 1.5px rgba(0, 0, 0, 0.3);
+    --row-shadow-height: 14px;
+    --row-shadow-opacity: 0.12;
   }
 }
 
@@ -42,6 +48,26 @@ a { color: inherit; }
   row-gap: 0;
   column-gap: 0;
   width: 100%;
+}
+
+/* A soft shadow band along the row boundary, as if the bottom row
+   (about/comics/links) is sitting slightly forward and casting a
+   collective shadow up onto the top row. Scoped to the homepage only
+   via .home-grid, not the shared .block-grid used on other pages. */
+.home-grid {
+  position: relative;
+}
+
+.home-grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50vh - var(--row-shadow-height));
+  height: var(--row-shadow-height);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, var(--row-shadow-opacity)));
+  pointer-events: none;
+  z-index: 5;
 }
 
 .cover {
@@ -88,7 +114,7 @@ a { color: inherit; }
   width: calc(100% + var(--jag-depth));
   height: 50vh;
   margin-right: calc(-1 * var(--jag-depth));
-  filter: drop-shadow(8px 0 10px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(var(--jag-shadow));
 }
 
 .jagged-wrap .cover {
