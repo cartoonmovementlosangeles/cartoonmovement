@@ -26,16 +26,16 @@ a { color: inherit; }
 :root {
   --jag-depth: 2.5vh;
   --jag-shadow: 6px 0 3px rgba(0, 0, 0, 0.45);
-  --row-shadow-height: 24px;
-  --row-shadow-opacity: 0.18;
+  --row-shadow-height: 8px;
+  --row-shadow-opacity: 0.3;
 }
 
 @media (max-width: 600px) {
   :root {
     --jag-depth: 1.25vh;
     --jag-shadow: 3px 0 1.5px rgba(0, 0, 0, 0.3);
-    --row-shadow-height: 14px;
-    --row-shadow-opacity: 0.12;
+    --row-shadow-height: 5px;
+    --row-shadow-opacity: 0.2;
   }
 }
 
