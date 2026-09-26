@@ -57,6 +57,7 @@ a { color: inherit; }
    via .home-grid, not the shared .block-grid used on other pages. */
 .home-grid {
   position: relative;
+   grid-template-columns: 1.2fr 1.2fr 0.6fr;
 }
 
 .home-grid::after {
