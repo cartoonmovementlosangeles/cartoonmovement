@@ -15,6 +15,13 @@ html, body {
 
 a { color: inherit; }
 
+/* Zigzag tooth depth for the jagged edge below — scales with viewport
+   width so the bite stays proportional on narrow phone screens instead
+   of staying a fixed 22px and eating into a much smaller block. */
+:root {
+  --jag-depth: clamp(8px, 2.5vw, 22px);
+}
+
 /* ---------- Grid blocks (home page + comics list) ---------- */
 
 .block-grid {
@@ -67,9 +74,9 @@ a { color: inherit; }
 .jagged-wrap {
   position: relative;
   z-index: 2;
-  width: calc(100% + 22px);
+  width: calc(100% + var(--jag-depth));
   height: 50vh;
-  margin-right: -22px;
+  margin-right: calc(-1 * var(--jag-depth));
   filter: drop-shadow(8px 0 10px rgba(0, 0, 0, 0.55));
 }
 
@@ -79,25 +86,25 @@ a { color: inherit; }
   clip-path: polygon(
     0% 0%,
     100% 0%,
-    calc(100% - 22px) 5%,
+    calc(100% - var(--jag-depth)) 5%,
     100% 10%,
-    calc(100% - 22px) 15%,
+    calc(100% - var(--jag-depth)) 15%,
     100% 20%,
-    calc(100% - 22px) 25%,
+    calc(100% - var(--jag-depth)) 25%,
     100% 30%,
-    calc(100% - 22px) 35%,
+    calc(100% - var(--jag-depth)) 35%,
     100% 40%,
-    calc(100% - 22px) 45%,
+    calc(100% - var(--jag-depth)) 45%,
     100% 50%,
-    calc(100% - 22px) 55%,
+    calc(100% - var(--jag-depth)) 55%,
     100% 60%,
-    calc(100% - 22px) 65%,
+    calc(100% - var(--jag-depth)) 65%,
     100% 70%,
-    calc(100% - 22px) 75%,
+    calc(100% - var(--jag-depth)) 75%,
     100% 80%,
-    calc(100% - 22px) 85%,
+    calc(100% - var(--jag-depth)) 85%,
     100% 90%,
-    calc(100% - 22px) 95%,
+    calc(100% - var(--jag-depth)) 95%,
     100% 100%,
     0% 100%
   );
