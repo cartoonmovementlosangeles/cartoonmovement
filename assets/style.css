@@ -68,7 +68,20 @@ a { color: inherit; }
   grid-template-columns: 1.2fr 1.2fr 0.6fr;
 }
 
+
+
 .home-grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50vh - var(--row-shadow-height));
+  height: var(--row-shadow-height);
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, var(--row-shadow-opacity)));
+  pointer-events: none;
+  z-index: 1;
+
+/* .home-grid::after {
   content: "";
   position: absolute;
   left: 40%;
@@ -77,7 +90,7 @@ a { color: inherit; }
   height: var(--row-shadow-height);
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, var(--row-shadow-opacity)));
   pointer-events: none;
-  z-index: 5;
+  z-index: 5; */
 }
 
 .cover {
