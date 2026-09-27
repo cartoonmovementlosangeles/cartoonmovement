@@ -28,6 +28,10 @@ a { color: inherit; }
   --jag-shadow: 6px 0 3px rgba(0, 0, 0, 0.45);
   --row-shadow-height: 8px;
   --row-shadow-opacity: 0.3;
+  /* Horizontal shift for a 60° diagonal across the 50vh row height:
+     shift = height / tan(60°). Kept in vh so the angle stays true
+     to 60° on any screen size, same reasoning as --jag-depth. */
+  --diag-shift: 28.8675vh;
 }
 
 @media (max-width: 600px) {
@@ -57,13 +61,17 @@ a { color: inherit; }
    via .home-grid, not the shared .block-grid used on other pages. */
 .home-grid {
   position: relative;
-   grid-template-columns: 1.2fr 1.2fr 0.6fr;
+  /* Narrower 3rd column — shrinks "links" (row 2) and also narrows the
+     right portion of the merged yellow title block (row 1), since it
+     spans columns 2+3 and shares this same column track. Adjust the
+     0.6fr to taste: smaller number = smaller links tile. */
+  grid-template-columns: 1.2fr 1.2fr 0.6fr;
 }
 
 .home-grid::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 40%;
   right: 0;
   top: calc(50vh - var(--row-shadow-height));
   height: var(--row-shadow-height);
@@ -202,6 +210,83 @@ a { color: inherit; }
   }
 }
 
+/* Corner scoop on the "about" tile: three layers deep on purpose.
+   1. .curve-wrap — the blue backer, plain, no clip, no filter.
+   2. .curve-shadow — invisible itself (no background), holds the
+      filter:drop-shadow. Because it has no clip-path of its own, the
+      shadow isn't cropped away — it traces whatever shape its clipped
+      child (below) actually renders, so the shadow follows the curve
+      instead of being a plain rectangle.
+   3. .cover.curve-cut — the red foreground, clipped to the curve. */
+/* Diagonal boundary between "comics" and "links" (60° slant, bottom
+   jutting out): comics widens rightward into links' column by
+   --diag-shift and gets a straight diagonal clip — flush with the
+   normal column line at the top, fully extended at the bottom. Same
+   overlap technique as the jagged edge (widen + negative margin +
+   elevated z-index so it paints over the block it's biting into). */
+.diag-wrap {
+  position: relative;
+  z-index: 2;
+  width: calc(100% + var(--diag-shift));
+  height: 50vh;
+  margin-right: calc(-1 * var(--diag-shift));
+}
+
+.diag-wrap .cover.diag-cut {
+  width: 100%;
+  height: 50vh;
+  clip-path: polygon(
+    0% 0%,
+    calc(100% - var(--diag-shift)) 0%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+.curve-wrap {
+  position: relative;
+  height: calc(50vh + 6px);
+  margin-top: -6px;
+  padding-top: 6px;
+}
+
+.curve-wrap .curve-clip-boundary {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.curve-wrap .curve-shadow {
+  width: 100%;
+  height: 50vh;
+  filter: drop-shadow(-3px -3px 4px rgba(0, 0, 0, 0.4));
+}
+
+.curve-wrap .cover.curve-cut {
+  width: 100%;
+  height: 50vh;
+  clip-path: polygon(
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    0.0% 32.0%,
+    0.43% 28.42%,
+    1.7% 24.88%,
+    3.82% 21.43%,
+    6.73% 18.12%,
+    10.42% 14.97%,
+    14.84% 12.05%,
+    19.92% 9.37%,
+    25.6% 6.98%,
+    31.82% 4.9%,
+    38.5% 3.17%,
+    45.54% 1.8%,
+    52.87% 0.8%,
+    60.39% 0.2%,
+    68.0% 0.0%
+  );
+}
+
 /* ---------- Reader: edge-to-edge panels ---------- */
 
 
@@ -222,19 +307,17 @@ a { color: inherit; }
   position: fixed;
   top: 16px;
   left: 16px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
+  display: block;
   z-index: 40;
   text-decoration: none;
   color: #111;
   animation: back-btn-sway 1.6s ease-in-out infinite;
+}
+
+.back-btn img {
+  display: block;
+  width: 44px;
+  height: auto;
 }
 
 @keyframes back-btn-sway {
