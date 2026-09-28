@@ -300,20 +300,24 @@ a { color: inherit; }
   );
 }
 
-/* ---------- Reader: edge-to-edge panels ---------- */
-
+/* ---------- Reader: edge-to-edge scrolling comic panels ---------- */
 
 .reader {
   width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .panel {
   display: block;
   width: 100%;
   border: none;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+.panel img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .back-btn {
