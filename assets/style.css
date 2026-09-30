@@ -26,7 +26,7 @@ a { color: inherit; }
 :root {
   /* >>> CHANGE THE SIDE-STRIP COLORS HERE <<< */
   --edge-color-about: #4FA8E0;  /* same blue as the home page tile */
-  --edge-color-links: #000000;
+  --edge-color-links: #4FA8E0;
 
   --jag-depth: 2.5vh;
   --jag-shadow: 6px 0 3px rgba(0, 0, 0, 0.45);
