@@ -24,8 +24,9 @@ a { color: inherit; }
    polygon (more, smaller teeth) so the squares stay square instead of
    just shrinking sideways. */
 :root {
-  /* >>> CHANGE THE ABOUT PAGE SIDE-STRIP COLOR HERE <<< */
-  --edge-color: #4FA8E0;
+  /* >>> CHANGE THE SIDE-STRIP COLORS HERE <<< */
+  --edge-color-about: #4FA8E0;  /* same blue as the home page tile */
+  --edge-color-links: #000000;
 
   --jag-depth: 2.5vh;
   --jag-shadow: 6px 0 3px rgba(0, 0, 0, 0.45);
@@ -403,15 +404,17 @@ a { color: inherit; }
   color: #fff;
 }
 
-/* Jagged strips down both sides of the ABOUT PAGE (uses --edge-color
+/* Jagged strips down both sides of the about and links pages (each page's color comes
    from :root at the top of this file). Same square-tooth idea as the
    blue tile on the home page: --side-jag matches the vertical step,
    so every tooth is a 45-degree diagonal. The right strip is the
    left one flipped with scaleX(-1). */
 .side-edge {
   --side-jag: 2.5vh;
-  --side-width: clamp(8px, min(8vw, calc(50vw - 312px - 2.5vh)), 120px); 
-  /* --side-width: clamp(8px, 4vw, 48px); */
+  /* Desktop strip thickness: grows with the window (8vw) up to 120px,
+     but never wider than the empty margin beside the text column, so it
+     can't run into the text on tablets. Bump 8vw / 120px to go thicker. */
+  --side-width: clamp(8px, min(8vw, calc(50vw - 312px - 2.5vh)), 120px);
   position: fixed;
   top: 0;
   height: 100vh;
@@ -465,6 +468,9 @@ a { color: inherit; }
     0% 100%
   );
 }
+
+.about-page { --edge-color: var(--edge-color-about); }
+.links-page { --edge-color: var(--edge-color-links); }
 
 .side-edge-left  { left: 0; }
 .side-edge-right { right: 0; transform: scaleX(-1); }
@@ -561,7 +567,9 @@ a { color: inherit; }
     0% 100%
     );
   }
-  .about-page .simple-page {
+  .about-page .simple-page,
+  .links-page .gif-slot,
+  .links-page .links-list {
     padding-left: 32px;
     padding-right: 32px;
   }
