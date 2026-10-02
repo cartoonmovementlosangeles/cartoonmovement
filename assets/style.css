@@ -596,8 +596,11 @@ a { color: inherit; }
 }
 
 .gif-slot img {
-  width: 100%;
   display: block;
+  margin: 0 auto;
+  width: auto;        /* show the gif at its own size, never stretched */
+  max-width: 100%;    /* ...but shrink on screens narrower than the gif */
+  height: auto;
 }
 
 .links-list {
@@ -616,9 +619,49 @@ a { color: inherit; }
   font-size: 1.05rem;
 }
 
-.links-list a:hover {
-  color: #555;
+/* Link styling: bold comic-style text, a gif slot before each link.
+   ONE gif for every link: set --icon just below.
+   A different gif for one link: <a style="--icon:url('assets/other.gif')">
+   No gif at all for one link: <a style="--icon:none"> (the space stays). */
+.links-list {
+  --icon: url('assets/linksitems.gif');
+  --icon-size: 44px;
 }
+
+.links-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-shadow: 2px 2px 0 var(--shadow-color, #4FA8E0);   /* offset "print" shadow */
+  text-decoration: underline 5px #F5C518;                /* highlighter underline */
+  text-underline-offset: 6px;
+  text-decoration-skip-ink: none;
+  border-bottom: none;
+  transform: rotate(-1.5deg);
+  transform-origin: left center;
+  transition: transform 0.1s;
+}
+
+.links-list p:nth-of-type(even) a { transform: rotate(1deg); }
+.links-list p:nth-of-type(3n+2) a { --shadow-color: #E1362B; }
+.links-list p:nth-of-type(3n)   a { --shadow-color: #F5C518; }
+
+/* tap feedback for phones */
+.links-list p a:active { transform: scale(0.96) rotate(0deg); }
+
+.links-list a::before {
+  content: "";
+  flex: none;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  background: var(--icon) center / contain no-repeat;
+}
+
+.links-list a:hover { color: #111; }
 
 /* ---------- CRT overlay (disabled — uncomment to bring back) ---------- */
 /* Scanlines + a soft vignette, layered over everything via fixed
